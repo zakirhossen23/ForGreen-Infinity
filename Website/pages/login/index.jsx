@@ -29,7 +29,7 @@ export default function Login() {
         try {
             const getacc = await window.ethereum.request({
                 method: 'wallet_switchEthereumChain',
-                params: [{ chainId: '0x507', }], //1287
+                params: [{ chainId: '0x4', }], //4
             });
             getacc;
         } catch (switchError) {
@@ -40,14 +40,14 @@ export default function Login() {
                         method: 'wallet_addEthereumChain',
                         params: [
                             {
-                                chainId: '0x507', //1287
-                                chainName: 'moonbase-alphanet',
+                                chainId: '0x4', //4
+                                chainName: 'Rinkeby Test Network',
                                 nativeCurrency: {
-                                    name: 'DEV',
-                                    symbol: 'DEV',
+                                    name: 'LINK',
+                                    symbol: 'LINK',
                                     decimals: 18,
                                 },
-                                rpcUrls: ['https://rpc.api.moonbase.moonbeam.network'],
+                                rpcUrls: ['https://rinkeby.infura.io/v3/'],
                             },
                         ],
                     });

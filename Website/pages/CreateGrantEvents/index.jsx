@@ -37,7 +37,7 @@ export default function CreateGrantPoolEvents() {
     const [EventPrice, EventPriceInput] = UseFormInput({
         defaultValue: "",
         type: 'text',
-        placeholder: 'Total price in DEV',
+        placeholder: 'Total price in LINK',
         id: 'price',
     });
 

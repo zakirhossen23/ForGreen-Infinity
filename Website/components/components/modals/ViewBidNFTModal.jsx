@@ -115,7 +115,7 @@ export default function ViewmodalShow({
 										<h7 className="cell">{listItem.name}</h7>
 									</div>
 									<div className="tableRowCellBidContainer">
-										<h7 className="cell">{listItem.bidprice} DEV</h7>
+										<h7 className="cell">{listItem.bidprice} LINK</h7>
 									</div>
 								</div>
 							</div>

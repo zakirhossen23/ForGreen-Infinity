@@ -54,47 +54,58 @@ export default function DirectDonateModal({
 			let AmountinFull = (Number(Amount) * 1000000000000000000).toLocaleString('fullwide', { useGrouping: false });
 			console.log("Donating")
 
-			web3.eth.sendTransaction({
-				from:window.ethereum.selectedAddress,
-				to: EventWallet,
-				value: AmountinFull
-			}, async (err, transactionId) => {
-				if (err) {
-					console.log('Payment failed', err)
-				} else {
-					console.log('Payment successful', transactionId)
-
-
-					activateWorkingModal("A moment please")
-					const expectedBlockTime = 1000;
-					let transactionReceipt = null
-					while (transactionReceipt == null) { // Waiting expectedBlockTime until the transaction is mined
-						transactionReceipt = await web3.eth.getTransactionReceipt(transactionId);
-						await sleep(expectedBlockTime)
+		
+			const ABI = [				
+				{
+				  "constant": true,
+				  "inputs": [
+					{
+					  "name": "_to",
+					  "type": "address"
+					},
+					{
+					  "name": "_value",
+					  "type": "uint256"
 					}
-		
-					const Raised = Number(await contract.getEventRaised(eventId)) + Number(convertedDefaultAmount);
-		
-					activateWorkingModal("Done! Please confirm Updating Raised...")
-		
-					const result2 = await contract._setEventRaised(Number(eventId), Raised.toString());
-					activateWorkingModal("A moment please")
-					transactionReceipt = null;
-					while (transactionReceipt == null) { // Waiting expectedBlockTime until the transaction is mined
-						transactionReceipt = await web3.eth.getTransactionReceipt(result2.hash);
-						await sleep(expectedBlockTime)
+				  ],
+				  "name": "transfer",
+				  "outputs": [
+					{
+					  "name": "success",
+					  "type": "bool"
 					}
-		
-					console.log(transactionReceipt);
-					activateWorkingModal("Success!")
-					window.document.getElementsByClassName("btn-close")[0].click();
-					DonateBTN.disabled = false;
-					await sleep(200)
-					window.location.reload();
-		
+				  ],
+				  "payable": false,
+				  "stateMutability": "nonpayable",
+				  "type": "function"
+				}	
+			  ];
+            const address = '0x01BE23585060835E02B77ef475b0Cc51aA1e0709'; //Chainlink contract link
+            const contract2 = new web3.eth.Contract(ABI,address);
+			console.log(contract2);
+			const contractData = await contract2.methods.transfer(EventWallet,(AmountinFull) ).send({from: senderAddress,  gasPrice: 10000000000, gasLimit:400000});
+			console.log(contractData);
+			
+			const Raised = Number(await contract.getEventRaised(eventId)) + Number(convertedDefaultAmount);
 
-				}
-			})
+			activateWorkingModal("Done! Please confirm Updating Raised...")
+
+			const result2 = await contract._setEventRaised(Number(eventId), Raised.toString());
+			activateWorkingModal("A moment please")
+			let transactionReceipt = null;
+			while (transactionReceipt == null) { // Waiting expectedBlockTime until the transaction is mined
+				transactionReceipt = await web3.eth.getTransactionReceipt(result2.hash);
+				await sleep(expectedBlockTime)
+			}
+
+			console.log(transactionReceipt);
+			activateWorkingModal("Success!")
+			window.document.getElementsByClassName("btn-close")[0].click();
+			DonateBTN.disabled = false;
+			await sleep(200)
+			window.location.reload();
+
+
 
 		} catch (e) {
 			console.error(e);

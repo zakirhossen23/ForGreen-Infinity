@@ -149,7 +149,7 @@ export default function GrantsPoolEvents() {
                                 <h6 className='donation event-details-title'>{listItem.Title}</h6>
                                 <div style={{ display: "flex", "whiteSpace": "pre-wrap" }}>
                                     <h6 className='donation event-goal-price' >Goal:  </h6>
-                                    <h6 className='donation event-goal-price' >{listItem.Price} DEV</h6>
+                                    <h6 className='donation event-goal-price' >{listItem.Price} LINK</h6>
                                 </div>
 
                             </div>

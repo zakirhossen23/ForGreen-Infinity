@@ -38,7 +38,7 @@ export default function CreateEvents() {
     const [EventGoal, EventGoalInput] = UseFormInput({
         defaultValue: "",
         type: 'text',
-        placeholder: 'Event Goal in DEV',
+        placeholder: 'Event Goal in LINK',
         id: 'goal',
     });
 

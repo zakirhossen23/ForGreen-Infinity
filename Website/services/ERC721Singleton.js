@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 
-import erc721 from '../contracts/deployments/moonbeam/MoonbeamERC721.json';
+import erc721 from '../contracts/deployments/Chainlink/ChainLinkERC721.json';
 
 export default function ERC721Singleton(signer) {
 	if (!ERC721Singleton._instance) {

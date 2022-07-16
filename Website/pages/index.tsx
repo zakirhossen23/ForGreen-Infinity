@@ -37,7 +37,7 @@ export default function Welcome() {
 				</div>
 				<div className="text-center">
 					<h4 className='welcome description' >
-					Donation events as a service, to create the most easy, transparent and fun NFT charity auction, by using the power of Polkadot to help organizations raise additional support for a green world!
+					Donation events as a service, to create the most easy, transparent and fun NFT charity auction, by using the power of Web3 Infinity to help organizations raise additional support for a green world!
 
 
 

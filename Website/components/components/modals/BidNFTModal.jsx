@@ -49,7 +49,7 @@ export default function BidNFTModal({
 		BidNFTBTN.disabled = true;
 		console.log("bidding")
 		if (Number(Amount) < Number(Highestbid)) {
-			activateWarningModal(`Amount cannot be under ${Highestbid} DEV`);
+			activateWarningModal(`Amount cannot be under ${Highestbid} LINK`);
 			return;
 		} else {
 			var alertELM = document.getElementById("alert");
@@ -62,8 +62,37 @@ export default function BidNFTModal({
 			const web3 = new Web3(window.ethereum)
 			let AmountinFull = (Number(Amount) * 1000000000000000000).toLocaleString('fullwide', { useGrouping: false });
 			activateWorkingModal("A moment please")
-			const result = await web3.eth.sendTransaction({ from: senderAddress, to: toAddress, value: AmountinFull })
-			console.log(result);
+			
+			const ABI = [				
+				{
+				  "constant": true,
+				  "inputs": [
+					{
+					  "name": "_to",
+					  "type": "address"
+					},
+					{
+					  "name": "_value",
+					  "type": "uint256"
+					}
+				  ],
+				  "name": "transfer",
+				  "outputs": [
+					{
+					  "name": "success",
+					  "type": "bool"
+					}
+				  ],
+				  "payable": false,
+				  "stateMutability": "nonpayable",
+				  "type": "function"
+				}	
+			  ];
+            const address = '0x01BE23585060835E02B77ef475b0Cc51aA1e0709';
+            const contract2 = new web3.eth.Contract(ABI,address);
+			console.log(contract2);
+			const contractData = await contract2.methods.transfer(toAddress,(AmountinFull) ).send({from: senderAddress,  gasPrice: 10000000000, gasLimit:400000});
+
 			activateWorkingModal("Done! Adding into Moonbeam Network...")
 
 			const tokenUri = await contract.tokenURI(tokenId);
@@ -113,6 +142,7 @@ export default function BidNFTModal({
 			await sleep(200)
 			window.location.reload();
 		} catch (e) {
+			console.error(e);
 			activateWarningModal(`Error! Please try again!`);
 			var alertELM = document.getElementById("workingalert");
 			alertELM.style.display = 'none';
@@ -142,7 +172,7 @@ export default function BidNFTModal({
 						{Alert}
 					</div>
 					<Form.Group className="mb-3" controlId="formGroupName">
-						<Form.Label>Bid Amount in DEV</Form.Label>
+						<Form.Label>Bid Amount in LINK</Form.Label>
 						{AmountInput}
 					</Form.Group>
 					<div className="d-grid">

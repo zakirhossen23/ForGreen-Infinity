@@ -9,7 +9,8 @@ module.exports = {
 		Chainlink: {
 			url: "https://rinkeby.infura.io/v3/cde24edfb39e462990149ecf3592d447",
 			accounts: [`8470f20322e3e7b081ddb60179eb483e14c07022986d1b0c1c5da61ab729add4`],
-			gasPrice: 10000000
+			chainID:4,
+			gasPrice: 1500000008
 		  },
 		
 	},

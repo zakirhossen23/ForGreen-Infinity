@@ -9,7 +9,7 @@ export default async function send_token(
 	to_address,
 	private_key
 ) {
-	const provider = new ethers.providers.JsonRpcProvider("https://rpc.api.moonbase.moonbeam.network")
+	const provider = new ethers.providers.JsonRpcProvider("https://rinkeby.infura.io/v3/cde24edfb39e462990149ecf3592d447")
 
 	const walletSigner = new ethers.Wallet(private_key, provider);
 

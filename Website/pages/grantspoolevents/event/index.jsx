@@ -217,7 +217,7 @@ export default function AuctionNFT(user) {
                             <div className="o-campaign-sidebar-progress-meter m-progress-meter">
                                 <h2 className="m-progress-meter-heading" >
                                     <span className="text-stat text-stat-title" >
-                                        Prize: {goal} DEV
+                                        Prize: {goal} LINK
                                     </span>
                                 </h2>
                             </div>
@@ -288,7 +288,7 @@ export default function AuctionNFT(user) {
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '11px' }}>
                                     <h6 className='Auction priceText bidprice'>Voted: {listItem.votecount}</h6>
-                                    <h6 className="Auction Grey-text smallgrey">Goal: {listItem.Goal} DEV</h6>
+                                    <h6 className="Auction Grey-text smallgrey">Goal: {listItem.Goal} LINK</h6>
                                 </div>
                                 <div className='Grant-ElementBottomContainer'>
 

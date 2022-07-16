@@ -17,8 +17,32 @@ export function Nav(): JSX.Element {
         }
         if (window.ethereum.selectedAddress != null && window.localStorage.getItem("ConnectedMeta") == "true") {
             const Web3 = require("web3")
+            
             const web3 = new Web3(window.ethereum)
-            let Balance = await web3.eth.getBalance(window.ethereum.selectedAddress);
+
+            const ABI = [
+                {
+                  constant: true,
+                  inputs: [
+                    {
+                      name: "_owner",
+                      type: "address",
+                    },
+                  ],
+                  name: "balanceOf",
+                  outputs: [
+                    {
+                      name: "balance",
+                      type: "uint256",
+                    },
+                  ],
+                  payable: false,
+                  type: "function",
+                },
+              ];
+            const address = '0x01BE23585060835E02B77ef475b0Cc51aA1e0709'
+            const contract = new web3.eth.Contract(ABI, address)
+            const Balance = await contract.methods.balanceOf(window.ethereum.selectedAddress).call()
 
             let subbing = 10;
 
@@ -28,7 +52,7 @@ export function Nav(): JSX.Element {
             }
             await setAcc(window.ethereum.selectedAddress.toString().substring(0, subbing) + "...");
 
-            setBalance(Balance / 1000000000000000000 + " DEV");
+            setBalance(Balance / 1000000000000000000 + " LINK");
             setSigned(true);
             try {
 
